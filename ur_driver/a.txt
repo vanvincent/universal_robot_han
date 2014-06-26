@@ -1,0 +1,43 @@
+    #transform
+    #'shoulder_pan_joint'
+    invp = list(invp)
+    invp[2]=-invp[2]
+    invp = tuple(invp)
+    invv = list(invv)
+    invv[2]=-invv[2]
+    invv = tuple(invv)
+    #'shoulder_lift_joint'
+    invp = list(invp)
+    invp[1]=-invp[1]-3.14
+    invp = tuple(invp)
+    invv = list(invv)
+    invv[1]=-invv[1]
+    invv = tuple(invv)
+    #'elbow_joint'
+    invp = list(invp)
+    invp[0]=-invp[0]
+    invp = tuple(invp)
+    invv = list(invv)
+    invv[0]=-invv[0]
+    invv = tuple(invv)
+    
+    invp = list(invp)
+    invp[3]=-invp[3]-3.14
+    invp = tuple(invp)
+    invv = list(invv)
+    invv[3]=-invv[3]
+    invv = tuple(invv)
+    
+    invp = list(invp)
+    invp[4]=-invp[4]
+    invp = tuple(invp)
+    invv = list(invv)
+    invv[4]=-invv[4]
+    invv = tuple(invv)
+    
+    invp = list(invp)
+    invp[5]=-invp[5]
+    invp = tuple(invp)
+    invv = list(invv)
+    invv[5]=-invv[5]
+    invv = tuple(invv)
