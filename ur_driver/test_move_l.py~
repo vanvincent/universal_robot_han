@@ -35,7 +35,7 @@ def move1():
     g.trajectory = JointTrajectory()
     g.trajectory.joint_names = JOINT_NAMES
     #g.trajectory.points = [JointTrajectoryPoint(positions=Q, velocities=[0]*6, time_from_start=rospy.Duration(10.0))]
-    g.trajectory.points = [JointTrajectoryPoint(positions=position1, velocities=[0]*6, time_from_start=rospy.Duration(5.0)),JointTrajectoryPoint(positions=position11, velocities=[0]*6, time_from_start=rospy.Duration(7.0)),JointTrajectoryPoint(positions=position12, velocities=[0]*6, time_from_start=rospy.Duration(9.0)),JointTrajectoryPoint(positions=position13, velocities=[0]*6, time_from_start=rospy.Duration(11.0)),JointTrajectoryPoint(positions=position2, velocities=[0]*6, time_from_start=rospy.Duration(15.0))]
+    g.trajectory.points = [JointTrajectoryPoint(positions=position1, velocities=[0]*6, time_from_start=rospy.Duration(5.0)),JointTrajectoryPoint(positions=position11, velocities=[0]*6, time_from_start=rospy.Duration(7.0)),JointTrajectoryPoint(positions=position12, velocities=[0]*6, time_from_start=rospy.Duration(9.0)),JointTrajectoryPoint(positions=position13, velocities=[0]*6, time_from_start=rospy.Duration(11.0)),JointTrajectoryPoint(positions=position2, velocities=[0]*6, time_from_start=rospy.Duration(15.0)),JointTrajectoryPoint(positions=position3, velocities=[0]*6,time_from_start=rospy.Duration(20.0))]
     client.send_goal(g)
     try:
         client.wait_for_result()

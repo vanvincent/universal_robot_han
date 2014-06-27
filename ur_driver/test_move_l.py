@@ -43,6 +43,7 @@ def move1():
         client.cancel_goal()
         raise
 
+
 def move2():
     g = FollowJointTrajectoryGoal()
     g.trajectory = JointTrajectory()
