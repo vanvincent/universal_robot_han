@@ -8,10 +8,25 @@ from trajectory_msgs.msg import *
 
 JOINT_NAMES = ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint',
                'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint']
-Q1 = [-1.57,0,0,0,0,0]
 Q0 = [0.0,0.0,0.0,0,0,0]
-Q2 = [1.57,0,0,0,0,0]
+Q1 = [-1.57,0,0,0,0,0]
+Q2 = [1.57,-1,1,-1,1,-1]
 Q3 = [1.5,-0.2,-1.57,0,0,0]
+position1 = [0.9521113579551601, -0.9065320825797771, 0.7498621056618813, -0.8176459283061543, 1.1322874366366973, 0.44111315519150374]
+
+position11= [1.0193443527995436, -0.9841022461680282, 0.8865518124388254, -0.850317908220787, 1.17485596940418, 0.3772920724713922]
+
+position12 = [1.4466734627134494,-1.129247123307457, 1.1634648590010492,  -0.8745119894299638, 1.4485820526532045, 0.040638099814573]
+
+position13 = [ 1.7071290319668746,-1.052462445776813,  1.086463352839103,-0.8606732617236705, 1.5521975705536804, -0.1511573118099383]
+
+position2 = [1.985245876551879, -0.8032840078752788, 0.7275086122303955, -0.7749373140050988, 1.8143981845360102, -0.36476032641438394]
+
+position3 = [2.0368537871144063,-1.0199954063618017, 1.406140377739991,  -1.2434676663968656, 1.8464052377476499, -0.4006549195327187]
+
+position4 = [1.9988048961314355, -0.8864630354676404,1.4085687821202733,  -2.0680578809159718, 1.517141096070917, -0.4178686867959831]
+
+position5 = [2.063781334334074, -0.9086649631965962, 0.956720503594668, 0.08731215773248469, 2.0243384800694155, -0.02162296086043014]
 Q = list();
 client = None
 
@@ -20,7 +35,7 @@ def move1():
     g.trajectory = JointTrajectory()
     g.trajectory.joint_names = JOINT_NAMES
     #g.trajectory.points = [JointTrajectoryPoint(positions=Q, velocities=[0]*6, time_from_start=rospy.Duration(10.0))]
-    g.trajectory.points = [JointTrajectoryPoint(positions=Q, velocities=[0]*6, time_from_start=rospy.Duration(10.0))]
+    g.trajectory.points = [JointTrajectoryPoint(positions=position1, velocities=[0]*6, time_from_start=rospy.Duration(5.0)),JointTrajectoryPoint(positions=position11, velocities=[0]*6, time_from_start=rospy.Duration(7.0)),JointTrajectoryPoint(positions=position12, velocities=[0]*6, time_from_start=rospy.Duration(9.0)),JointTrajectoryPoint(positions=position13, velocities=[0]*6, time_from_start=rospy.Duration(11.0)),JointTrajectoryPoint(positions=position2, velocities=[0]*6, time_from_start=rospy.Duration(15.0))]
     client.send_goal(g)
     try:
         client.wait_for_result()
@@ -33,7 +48,7 @@ def move2():
     g.trajectory = JointTrajectory()
     g.trajectory.joint_names = JOINT_NAMES
     #g.trajectory.points = [JointTrajectoryPoint(positions=Q, velocities=[0]*6, time_from_start=rospy.Duration(10.0))]
-    g.trajectory.points = [JointTrajectoryPoint(positions=Q1, velocities=[0]*6, time_from_start=rospy.Duration(15.0))]
+    g.trajectory.points = [JointTrajectoryPoint(positions=position4, velocities=[0]*6, time_from_start=rospy.Duration(5.0)),JointTrajectoryPoint(positions=position3, velocities=[0]*6, time_from_start=rospy.Duration(10.0)),JointTrajectoryPoint(positions=position5, velocities=[0]*6, time_from_start=rospy.Duration(15.0)),JointTrajectoryPoint(positions=position3, velocities=[0]*6, time_from_start=rospy.Duration(20.0)),JointTrajectoryPoint(positions=position2, velocities=[0]*6, time_from_start=rospy.Duration(25.0)),JointTrajectoryPoint(positions=position13, velocities=[0]*6, time_from_start=rospy.Duration(27.0)),JointTrajectoryPoint(positions=position12, velocities=[0]*6, time_from_start=rospy.Duration(29.0)),JointTrajectoryPoint(positions=position11, velocities=[0]*6, time_from_start=rospy.Duration(31.0))]
     client.send_goal(g)
     try:
         client.wait_for_result()
@@ -121,8 +136,8 @@ def main():
         client.wait_for_server()
         print "Connected to server"
         while 1:
+            move1()
             move2()
-            move3()
             #print 'Enter Tra Array:'
             #s = raw_input()
             #split1 = s.split(" ")
