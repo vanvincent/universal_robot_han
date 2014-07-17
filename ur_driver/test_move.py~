@@ -44,9 +44,10 @@ def callback3(data):
     g = FollowJointTrajectoryGoal()
     g.trajectory = JointTrajectory()
     g.trajectory.joint_names = JOINT_NAMES
-    g.trajectory.points = [JointTrajectoryPoint(positions=invp,velocities=[0]*6, time_from_start=rospy.Duration(7.0))]
+    g.trajectory.points = [JointTrajectoryPoint(positions=invp,velocities=[0]*6, time_from_start=rospy.Duration(6.0))]
     
     client.send_goal(g)
+    print "Send goal:",data.position
     try:
         client.wait_for_result()
         print "Waiting..."
@@ -55,6 +56,9 @@ def callback3(data):
         raise
     print "Initialization done"
     initialization=0;
+    print "sleep"
+    rospy.sleep(5.)
+    print "sleep finish"
     
 def callback(data):
 
@@ -105,8 +109,10 @@ def callback2(data):
 
 def listener():
 
+    global initialization;
     global client   
-
+    initialization = 1
+    
     try:
         rospy.init_node("test_move", anonymous=True, disable_signals=True)
         client = actionlib.SimpleActionClient('/ur5_r/arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
