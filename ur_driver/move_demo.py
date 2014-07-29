@@ -60,11 +60,11 @@ def move_group_python_interface_tutorial():
   moveit_commander.roscpp_initialize(sys.argv)
   rospy.init_node('move_group_python_interface_tutorial',
                   anonymous=True)
-
+  
   ## Instantiate a RobotCommander object. This object is an interface to
   ## the robot as a whole.
   robot = moveit_commander.RobotCommander()
-
+  
   ## Instantiate a PlanningSceneInterface object. This object is an interface
   ## to the world surrounding the robot.
   scene = moveit_commander.PlanningSceneInterface()
@@ -73,8 +73,9 @@ def move_group_python_interface_tutorial():
   ## to one group of joints. In this case the group is the joints in the left
   ## arm. This interface can be used to plan and execute motions on the left
   ## arm.
+  
   group = moveit_commander.MoveGroupCommander("left_arm")
-
+  
 
   ## We create this DisplayTrajectory publisher which is used below to publish
   ## trajectories for RVIZ to visualize.
