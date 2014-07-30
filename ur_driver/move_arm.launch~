@@ -1,0 +1,6 @@
+<launch>
+
+    <remap from="/joint_states" to="/ur5_l/joint_states"/>
+    <node name="movearm" pkg="ur_driver" type="move_left.py" output="screen" />
+    
+</launch>

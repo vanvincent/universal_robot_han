@@ -22,6 +22,7 @@ initialization = 1;
 def callback3(data):
 
     global initialization
+    global g
     
     if initialization==0:
         return
@@ -61,11 +62,12 @@ def callback3(data):
     print "sleep finish"
     
 def callback(data):
-
+    global g
     global initialization
     if initialization:
         return
-        
+    print "compute new goal..."
+   
     global invp
     global invv
     global invp_old
@@ -90,8 +92,7 @@ def callback(data):
     g.trajectory.joint_names = JOINT_NAMES
     g.trajectory.points = [JointTrajectoryPoint(positions=invp,velocities=invv,time_from_start=rospy.Duration(0.02))]
     
-    client.send_goal(g)
-    print "Send goal:",data.position
+    
     invp_old=invp
         
 def callback2(data):
@@ -103,7 +104,19 @@ def callback2(data):
     global invp2
     invp2=data.position
     
-
+def callback4(data):
+    global g
+    new=g
+    print "Send goal:",new.trajectory.points
+    client.send_goal(new)
+    try:
+        client.wait_for_result()
+        print "Waiting..."
+    except KeyboardInterrupt:
+        client.cancel_goal()
+        raise
+    
+    
 
 
 
@@ -113,19 +126,18 @@ def listener():
     global client   
     initialization = 1
     
-    try:
-        rospy.init_node("test_move", anonymous=True, disable_signals=True)
-        client = actionlib.SimpleActionClient('/ur5_r/arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
-        print "Waiting for server..."
-        client.wait_for_server()
-        print "Connected to server"
-        #initialization
-        rospy.Subscriber("/ur5_l/joint_states", JointState, callback3)
-        rospy.Subscriber("/ur5_l/joint_states", JointState, callback)
-        rospy.Subscriber("/ur5_r/joint_states", JointState, callback2)
-    except KeyboardInterrupt:
-        rospy.signal_shutdown("KeyboardInterrupt")
-        raise
-        
+
+    rospy.init_node("test_move", anonymous=True, disable_signals=True)
+    client = actionlib.SimpleActionClient('/ur5_r/arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+    print "Waiting for server..."
+    client.wait_for_server()
+    print "Connected to server"
+    #initialization
+    rospy.Subscriber("/joint_states", JointState, callback3)
+    rospy.Subscriber("/joint_states", JointState, callback)
+    rospy.Subscriber("/joint_states", JointState, callback2)
+    rospy.Subscriber("/joint_states", JointState, callback4)
     rospy.spin()
+    
+        
 if __name__ == '__main__': listener()

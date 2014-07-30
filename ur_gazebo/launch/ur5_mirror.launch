@@ -1,8 +1,30 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="limited" default="false"/>
-
-
+  <!-- remapping topics -->
+  <remap from="/ur5_l/joint_states" to="/joint_states" />
+  <remap from="/ur5_l/arm_controller/command" to="/arm_controller/command" />
+  <remap from="/ur5_l/arm_controller/follow_joint_trajectory/cancel" to="/arm_controller/follow_joint_trajectory/cancel" />
+  <remap from="/ur5_l/arm_controller/follow_joint_trajectory/feedback" to="/arm_controller/follow_joint_trajectory/feedback" />
+  <remap from="/ur5_l/arm_controller/follow_joint_trajectory/goal" to="/arm_controller/follow_joint_trajectory/goal" />
+  <remap from="/ur5_l/arm_controller/follow_joint_trajectory/result" to="/arm_controller/follow_joint_trajectory/result" />
+  <remap from="/ur5_l/arm_controller/follow_joint_trajectory/status" to="/arm_controller/follow_joint_trajectory/status" />
+  <remap from="/ur5_l/arm_controller/gains/elbow_joint/parameter_descriptions" to="/arm_controller/gains/elbow_joint/parameter_descriptions" />
+  <remap from="/ur5_l/arm_controller/gains/elbow_joint/parameter_updates" to="/arm_controller/gains/elbow_joint/parameter_updates" />
+  <remap from="/ur5_l/arm_controller/gains/shoulder_lift_joint/parameter_descriptions" to="/arm_controller/gains/shoulder_lift_joint/parameter_descriptions" />
+  <remap from="/ur5_l/arm_controller/gains/shoulder_lift_joint/parameter_updates" to="/arm_controller/gains/shoulder_lift_joint/parameter_updates" />
+  <remap from="/ur5_l/arm_controller/gains/shoulder_pan_joint/parameter_descriptions" to="/arm_controller/gains/shoulder_pan_joint/parameter_descriptions" />
+  <remap from="/ur5_l/arm_controller/gains/shoulder_pan_joint/parameter_updates" to="/arm_controller/gains/shoulder_pan_joint/parameter_updates" />
+  <remap from="/ur5_l/arm_controller/gains/wrist_1_joint/parameter_descriptions" to="/arm_controller/gains/wrist_1_joint/parameter_descriptions" />
+  <remap from="/ur5_l/arm_controller/gains/wrist_1_joint/parameter_updates" to="/arm_controller/gains/wrist_1_joint/parameter_updates" />
+  <remap from="/ur5_l/arm_controller/gains/wrist_2_joint/parameter_descriptions" to="/arm_controller/gains/wrist_2_joint/parameter_descriptions" />
+  <remap from="/ur5_l/arm_controller/gains/wrist_2_joint/parameter_updates" to="/arm_controller/gains/wrist_2_joint/parameter_updates" />
+  <remap from="/ur5_l/arm_controller/gains/wrist_3_joint/parameter_descriptions" to="/arm_controller/gains/wrist_3_joint/parameter_descriptions" />
+  <remap from="/ur5_l/arm_controller/gains/wrist_3_joint/parameter_updates" to="/arm_controller/gains/wrist_3_joint/parameter_updates" />
+  <remap from="/ur5_l/arm_controller/state" to="/arm_controller/state" />
+  <remap from="/ur5_l/mechanism_statistics" to="/mechanism_statistics" />
+  
+  
   <!-- startup simulated world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" default="worlds/empty.world"/>
@@ -21,6 +43,10 @@
 
   <rosparam file="$(find ur_gazebo)/controller/arm_controller_ur5.yaml" command="load"/>
   <node name="arm_controller_spawner" pkg="controller_manager" type="spawner" args="arm_controller" />
+  
+  
+
+  
 </group>
 
 <group ns="ur5_r">
